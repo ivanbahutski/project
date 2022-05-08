@@ -59,7 +59,6 @@
     </table>
     <table border="1">
         <caption>Summary per year-month</caption>
-        <tr>
             {% for date, total_y in summary_per_year_month.items%}
         <tr>
             <td>{{date}}:</td>
@@ -70,9 +69,7 @@
     <table border="1">
         <caption>Total</caption>
         <tr>
-        <tr>
             <td>{{total_spent|floatformat:2}}</td>
-        </tr>
         </tr>
     </table>
 </div>

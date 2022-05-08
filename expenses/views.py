@@ -13,16 +13,18 @@ class ExpenseListView(ListView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         queryset = object_list if object_list is not None else self.object_list
-
         form = ExpenseSearchForm(self.request.GET)
         if form.is_valid():
             name = form.cleaned_data.get('name', '').strip()
             date = form.cleaned_data.get('date')
+            category = form.cleaned_data.get('category')
             if name:
                 queryset = queryset.filter(name__icontains=name)
             if date:
                 queryset = queryset.filter(date__gte=date,
                                            date__lte=datetime.datetime.now())
+            if category:
+                queryset = queryset.filter(category__name__icontains=category)
 
         return super().get_context_data(
             form=form,
@@ -36,4 +38,3 @@ class ExpenseListView(ListView):
 class CategoryListView(ListView):
     model = Category
     paginate_by = 5
-

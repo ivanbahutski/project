@@ -9,7 +9,7 @@ class DateInput(forms.DateInput):
 class ExpenseSearchForm(forms.ModelForm):
     class Meta:
         model = Expense
-        fields = ('name', 'date',)
+        fields = ('name', 'date', 'category', )
         widgets = {
             'date': DateInput()
         }
@@ -18,3 +18,4 @@ class ExpenseSearchForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         self.fields['name'].required = False
         self.fields['date'].required = False
+        self.fields['category'].required = False
