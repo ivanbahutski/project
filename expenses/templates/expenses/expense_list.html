@@ -48,15 +48,24 @@
 <div style="display: flex; justify-content: space-around">
     <table border="1">
         <caption>Summary per category</caption>
-        <tr>
-            {% for category, total in summary_per_category.items %}
+
+        {% for category, total in summary_per_category.items %}
         <tr>
             <td>{{category}}:</td>
             <td>{{total|floatformat:2}}</td>
         </tr>
         {% endfor %}
-        </tr>
+
     </table>
+    <table border="1">
+        <caption>Summary per year-month</caption>
+        <tr>
+            {% for date, total_y in summary_per_year_month.items%}
+        <tr>
+            <td>{{date}}:</td>
+            <td>{{total_y|floatformat:2}}</td>
+        </tr>
+        {% endfor %}
     </table>
     <table border="1">
         <caption>Total</caption>
