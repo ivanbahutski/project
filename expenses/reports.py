@@ -14,3 +14,7 @@ def summary_per_category(queryset):
         .values_list('category_name', 's')
     ))
 
+
+def total_spent(queryset):
+    total = [d for a in queryset.values('amount') for d in a.values()]
+    return sum(total)
