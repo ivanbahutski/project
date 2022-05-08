@@ -1,5 +1,4 @@
 import datetime
-
 from django.views.generic.list import ListView
 
 from .forms import ExpenseSearchForm
