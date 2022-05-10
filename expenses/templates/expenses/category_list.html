@@ -2,28 +2,45 @@
 
 {% block content %}
 <a href="{% url 'expenses:category-create' %}">add</a>
+<div style="display: flex; justify-content: start-flex">
+    <table border="1">
+        <thead>
+        <tr>
+            <th>no.</th>
+            <th>name</th>
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for obj in object_list %}
 
-<table border="1">
-    <thead>
-    <tr>
-        <th>no.</th>
-        <th>name</th>
-        <th>actions</th>
-    </tr>
-    </thead>
-    <tbody>
-    {% for obj in object_list %}
-    <tr>
-        <td>{{ page_obj.start_index|add:forloop.counter0 }}.</td>
-        <td>{{obj.name}}</td>
-        <td>
-            <a href="{% url 'expenses:category-edit' obj.id %}">edit</a>
-            <a href="{% url 'expenses:category-delete' obj.id %}">delete</a>
-    </tr>
+        <tr>
+            <td>{{ page_obj.start_index|add:forloop.counter0 }}.</td>
+            <td>{{obj.name}}</td>
 
-    {% endfor%}
+            <td>
+                <a href="{% url 'expenses:category-edit' obj.id %}">edit</a>
+                <a href="{% url 'expenses:category-delete' obj.id %}">delete</a>
+            </td>
 
+        </tr>
+        {% endfor%}
+        <table border="1">
+            <thead>
+            <tr>
+                <th>expense</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for expense in expenses.values%}
+            <tr>
+                <td>{{expense|floatformat:2}}</td>
+            </tr>
+            {%endfor%}
+            </tbody>
+        </table>
 
-    </tbody>
-</table>
+        </tbody>
+    </table>
+</div>
 {% endblock %}

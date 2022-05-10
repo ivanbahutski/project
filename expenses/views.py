@@ -36,4 +36,16 @@ class ExpenseListView(ListView):
 
 class CategoryListView(ListView):
     model = Category
+
     paginate_by = 5
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        category_q = object_list if object_list is not None else self.object_list
+        expense_q = summary_per_category(Expense.objects.all())
+        name_cat = [n.name for n in category_q]
+        expenses_cat = {item: expense_q[str(item)] if item in expense_q else '0' for item in name_cat}
+        return super().get_context_data(
+            object_list=category_q,
+            expenses=expenses_cat,
+            **kwargs)
+
